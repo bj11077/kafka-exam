@@ -10,7 +10,7 @@ public class AbcProducer extends AbsProducer<AbcDto> {
 
 
     @Value("${spring.kafka.topic.abc}")
-    String topic;
+    private String topic;
 
 
 

@@ -22,12 +22,12 @@ public abstract class AbsConsumer<T> {
 
 
     // Dto타입 데이터로 변환해서 data에 저장
-    public void MessageToDto(ConsumerRecord<String, Object> message){
+    public void messageToDto(ConsumerRecord<String, Object> message){
         LinkedHashMap<String,Object> messageValue = (LinkedHashMap<String, Object>) message.value();
         ObjectMapper mapper = new ObjectMapper();
         System.out.println("message val");
         System.out.println(messageValue);
-        System.out.println(data.getClass());
+//        System.out.println(data.getClass());
         setData((T) mapper.convertValue(messageValue,getClassType()));
     }
 

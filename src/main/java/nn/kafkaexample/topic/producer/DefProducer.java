@@ -11,11 +11,11 @@ public class DefProducer extends AbsProducer<DefDto> {
 
 
     @Value("${spring.kafka.topic.def}")
-    String topic;
+    private String topic;
 
 
 
-//    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 1000)
     public void TopicSend(){
         setTopic(topic);
         DefDto dto = new DefDto();
