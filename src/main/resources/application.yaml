@@ -6,5 +6,15 @@ spring:
     topic:
       abc: abc
       def: def
+      tmp: tmp
 
-
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost/xe
+    username: local
+    password: local
+  datasource2:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test
+    username: local
+    password: local
