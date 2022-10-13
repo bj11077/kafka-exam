@@ -3,7 +3,10 @@ package nn.kafkaexample.topic.consumer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class AbsConsumer<T> {
 
@@ -18,11 +21,20 @@ public abstract class AbsConsumer<T> {
         this.data = data;
     }
 
+
     public abstract Class getClassType();
 
 
     // Dto타입 데이터로 변환해서 data에 저장
     public void messageToDto(ConsumerRecord<String, Object> message){
+        System.out.println("message.value");
+
+        if(message.value().getClass().getName().contains("List")){
+            ObjectMapper mapper = new ObjectMapper();
+            setData((T)((List<LinkedHashMap<String, Object>>)message.value()).stream().map(e->  mapper.convertValue(e,getClassType())).collect(Collectors.toList()));
+            return;
+        }
+
         LinkedHashMap<String,Object> messageValue = (LinkedHashMap<String, Object>) message.value();
         ObjectMapper mapper = new ObjectMapper();
         System.out.println("message val");
